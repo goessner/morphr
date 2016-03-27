@@ -1,6 +1,6 @@
 # Morphr
 
-<code>Morphr</code> is a tiny javascript class for morphing numerical values of arbitrary objects 
+<code>Morphr</code> is a tiny and lightweight javascript class for morphing numerical values of arbitrary objects 
 in a given time interval `dt` along a given range `dval`. Most often you will want to use it for 
 animation.
 
@@ -37,6 +37,10 @@ var rec = {x:100,y:100,b:20,h:100},               // plain javascript rectangle 
                    .start();
 </script>
 ```
+Sequential morphing is easily achieved via multiple <code>Morphr</code> objects.
+
+see [sequential](https://goessner.github.io/morphr/examples/sequential.html)
+
 
 ## API Reference
 

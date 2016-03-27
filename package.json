@@ -1,15 +1,17 @@
 {
   "name": "morphr",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Morphr - morphing numerical object values in a given time interval",
   "keywords": [
     "morphing",
-    "animation"
+    "animation",
+    "javascript",
+    "transition"
   ],
   "main": "morphr.js",
   "scripts": {
     "jsdoc": "jsdoc2md ./morphr.js > ./api.md",
-    "minify": "uglifyjs --comments -o ./morphr.min.js ./crocker.js"
+    "minify": "uglifyjs --comments -o ./morphr.min.js ./morphr.js"
   },
   "author": "Stefan Goessner <fang03@web.de>",
   "repository": {

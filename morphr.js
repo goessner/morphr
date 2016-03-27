@@ -33,7 +33,7 @@ var Morphr = {
          this.fn = typeof fn === "string" && Morphr[fn] ? Morphr[fn]
                  : typeof fn === "function" ? fn : Morphr.linear;
          this.handlers = [];
-         Morphr.prototype.animateHdl = Morphr.prototype.animate.bind(this);
+         this.animateHdl = Morphr.prototype.animate.bind(this);
       },
       /**
        * Register morphing handler function.
@@ -53,31 +53,27 @@ var Morphr = {
        * @returns {object} this.
        */
       start: function() {
-         this.time0 = false; 
+         this.tbeg = false; 
          this.animate();
          return this;
       },
       /**
        * @private
        */
-      animateHdl: null,
-      /**
-       * @private
-       */
       animate: function animate(time) {
-         var t = 0, time0 = this.time0 || (this.time0 = time) || false;
-         if (time0 && (t = time - time0) >= this.t0) {
-            var q = this.fn((time - time0)/this.dt);  // get normalized value by timing function.
+         var t = 0, tbeg = this.tbeg || (this.tbeg = time) || false;
+         if (tbeg && (t = time - tbeg - this.t0) >= 0) {
+            var q = this.fn(t/this.dt);  // get normalized value by timing function.
             for (var i=this.handlers.length-1; i>=0; --i)  // migrate to for (.. of ..) in near future ..
                this.handlers[i](q);
          }
-         if (t <= this.t0 + this.dt)
+         if (t <= this.dt)
             requestAnimationFrame(this.animateHdl);
       }
    },
    // some simple motion laws (timing functions) from cam design (VDI 2143) ... all in interval [0,1]
    linear: function(z) { return z; },
-   quadratic: function(z) { return z <= 0.5 ? 2*z*z : -2*z*z + 4*z +1; },
+   quadratic: function(z) { return z <= 0.5 ? 2*z*z : -2*z*z + 4*z - 1; },
    sinoid: function(z) { return z - Math.sin(2*Math.PI*z)/2/Math.PI; },
    poly5: function(z) { return 10*z*z*z - 15*z*z*z*z +6*z*z*z*z*z; }
 }

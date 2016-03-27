@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Morphr Simple</title>
+</head>
+
+<body>
+    <h1>Morphr Simple</h1>
+    <canvas id="c" width="401" height="301"></canvas>
+    <script src='../../g2/dist/g2.js'></script>
+    <script src='../morphr.js'></script>
+    <script>
+// object value handlers ...
+function value(obj,prop,dval) {
+   var val0 = obj[prop];
+   return function(q) { obj[prop] = val0 + q*dval; };
+}
+// render to canvas via g2 ..
+function render() {
+   g2().clr()
+       .rec(rec.x,rec.y,rec.b,rec.h,{ls:"maroon",lw:2,fs:"transparent",ld:[4,4]})
+       .exe(document.getElementById("c").getContext("2d"));
+}
+var rec = {x:100,y:100,b:20,h:100},               // plain javascript rectangle object ... 
+    morphr = Morphr.create(4,0,"sinoid")          // create and configure Morphr object ...
+                   .register(value(rec,"x",100))
+                   .register(value(rec,"y",50))
+                   .register(value(rec,"b",100))
+                   .register(value(rec,"h",-75))
+                   .register(render)
+                   .start();
+    </script>
+</body>
+</html>

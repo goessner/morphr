@@ -37,11 +37,11 @@ var rec = {x:100,y:100,b:20,h:100},               // plain javascript rectangle 
                    .start();
 </script>
 ```
-Sequential morphing is easily achieved via multiple <code>Morphr</code> objects.
+Sequential morphing is easily achieved via multiple <code>Morphr</code> objects. DOM element attributes are morphable as well.
 
 see [sequential](https://goessner.github.io/morphr/examples/sequential.html)
 
-Here is a more complex [Crank-Rocker animation](https://goessner.github.io/morphr/examples/complex.html) using
+Here is a more complex canvas based [Crank-Rocker animation](https://goessner.github.io/morphr/examples/complex.html) using
 a [g2](https://github.com/goessner/g2) command queue for vector graphics.
 
 Maybe you want to learn a bit more about [Crank-Rockers](https://github.com/goessner/crocker).
@@ -88,7 +88,7 @@ Register morphing handler function.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| hdl | <code>function</code> | Callback function `hdl(q){}`, where `q` is the - via `fn` - normalized time. |
+| hdl | <code>function</code> | Callback function `hdl(q){}`, where `q` is the - via `fn` - normalized time or the boolean value `false` to reset for a new start. |
 
 <a name="Morphr+start"></a>
 ### morphr.start() ⇒ <code>object</code>

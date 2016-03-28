@@ -7,15 +7,29 @@
 
 <body>
     <h1>Morphr Complex</h1>
-    <canvas id="c" width="401" height="301"></canvas>
+    <canvas id="c" width="401" height="301"></canvas><br>
+    <button id="btn" onclick="run()">run</button>
     <script src='../../g2/dist/g2.js'></script>
     <script src='../morphr.js'></script>
     <script>
+// initialization and dom attribute morphing ..
+function beg(q) { 
+   if (q === 0) {
+      Object.assign(cr,{a:50,b:100,c:80,d:100,phi:0});
+      document.getElementById("btn").setAttribute("disabled",true);
+   }
+}
+function end(q) { 
+   if (q > 0.98) {
+      document.getElementById("btn").removeAttribute("disabled");
+   }
+}
 // object value handlers ...
 function value(obj,prop,dval) {
    return function val(q) {
-      if (val.val0 === undefined) val.val0 = obj[prop];
-      obj[prop] = val.val0 + q*dval; 
+      if (q === false) delete val.val0;
+      else if (val.val0 === undefined) val.val0 = obj[prop];
+      else obj[prop] = val.val0 + q*dval;
    };
 }
 // render to canvas via g2 ..
@@ -28,6 +42,11 @@ function render() {
        .style({ls:"#555",lw:3,fs:"#ddd"})
        .cir(0,0,6).cir(cr.A.x,cr.A.y,6).cir(cr.B.x,cr.B.y,6).cir(cr.d,0,6)
        .exe(document.getElementById("c").getContext("2d"));
+}
+function run() {
+   mph1.start();
+   mph2.start();
+   mph3.start();
 }
 // define a crank rocker
 var cr = {a:50,b:100,c:80,d:100,phi:0,
@@ -43,18 +62,20 @@ var cr = {a:50,b:100,c:80,d:100,phi:0,
        }
     },
     mph1 = Morphr.create(4,0,"sinoid")          // drive crank forth ...
+                 .register(beg)
                  .register(value(cr,"phi",Math.PI))
                  .register(render) 
                  .start(),
     mph2 = Morphr.create(4,4,"poly5")          // change coupler and rocker length ...
-                 .register(value(cr,"a",-20))
+                 .register(value(cr,"a",-25))
                  .register(value(cr,"b",50))
                  .register(value(cr,"c",75))
                  .register(render) 
                  .start(),
     mph3 = Morphr.create(4,8,"sinoid")          // drive crank back ...
                  .register(value(cr,"phi",-Math.PI))
-                 .register(render) 
+                 .register(render)
+                 .register(end)
                  .start();
     </script>
 </body>

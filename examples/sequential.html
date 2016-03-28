@@ -7,11 +7,24 @@
 
 <body>
     <h1>Morphr Sequential</h1>
-    <canvas id="c" width="401" height="301"></canvas>
+    <canvas id="c" width="401" height="301"></canvas><br>
+    <button id="btn" onclick="run()">run</button>
     <script src='../../g2/dist/g2.js'></script>
     <script src='../morphr.js'></script>
     <script>
-// object value handlers ...
+// initialization and dom attribute morphing ..
+function beg(q) { 
+   if (q === 0) {
+      Object.assign(rec,{x:100,y:100,b:20,h:100});
+      document.getElementById("btn").setAttribute("disabled",true);
+   }
+}
+function end(q) { 
+   if (q > 0.98) {
+      document.getElementById("btn").removeAttribute("disabled");
+   }
+}
+// object numeric value handlers ...
 function value(obj,prop,dval) {
    var val0 = obj[prop];
    return function(q) { obj[prop] = val0 + q*dval; };
@@ -22,8 +35,14 @@ function render() {
        .rec(rec.x,rec.y,rec.b,rec.h,{ls:"maroon",lw:2,fs:"orange",ld:[4,4]})
        .exe(document.getElementById("c").getContext("2d"));
 }
+function run() {
+   mph1.start();
+   mph2.start();
+   mph3.start();
+}
 var rec = {x:100,y:100,b:20,h:100},               // plain javascript rectangle object ... 
     mph1 = Morphr.create(4,0,"sinoid")            // translate along (100,50) for 4 s
+                 .register(beg)
                  .register(value(rec,"x",100))
                  .register(value(rec,"y",50))
                  .register(render)
@@ -35,6 +54,7 @@ var rec = {x:100,y:100,b:20,h:100},               // plain javascript rectangle 
     mph3 = Morphr.create(2,6,"poly5")
                  .register(value(rec,"h",-75))    // decrease height by 75 for 2 s
                  .register(render)
+                 .register(end)
                  .start();
     </script>
 </body>

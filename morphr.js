@@ -40,14 +40,16 @@ var Morphr = {
       /**
        * Register morphing handler function.
        * @returns {object} this.
-       * @param {function} hdl Callback function `hdl(q){}`, where `q` is the - via `fn` - normalized time.
+       * @param {function} hdl Callback function `hdl(q){}`, where `q` is the - via `fn` - normalized time or the boolean value `false` to reset for a new start.
        */
       register: function(hdl) {
-         var idx = this.handlers.indexOf(hdl);
-         if (idx === -1)                // not registered, so add ..
-            this.handlers.push(hdl);
-         else                           // already registered, so remove ..
-            this.handlers.splice(idx,1);
+         if (hdl) {
+            var idx = this.handlers.indexOf(hdl);
+            if (idx === -1)                // not registered, so add ..
+               this.handlers.push(hdl);
+            else                           // already registered, so remove ..
+               this.handlers.splice(idx,1);
+         }
          return this;
       },
       /**
@@ -56,7 +58,9 @@ var Morphr = {
        */
       start: function() {
          this.tbeg = false; 
-         this.animate();
+         for (var i=this.handlers.length-1; i>=0; --i)  // reset handlers ...
+            this.handlers[i](false);
+         this.animate(0);
          return this;
       },
       /**

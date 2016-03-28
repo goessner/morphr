@@ -37,7 +37,6 @@ var cr = {a:50,b:100,c:80,d:100,phi:0,
              bbgg = this.b*this.b/gg,
              lam = (bbgg - this.c*this.c/gg + 1)/2,
              mu = Math.sqrt(bbgg - lam*lam),
-             cth = (lam*gx - mu*gy)/this.b, sth = (lam*gy + mu*gx)/this.b,
              cps = ((lam-1)*gx - mu*gy)/this.c, sps = ((lam-1)*gy + mu*gx)/this.c;
          this.A = {x:this.a*cph,y:this.a*sph};
          this.B = {x:this.d+this.c*cps,y:this.c*sps};

@@ -1,6 +1,6 @@
 {
   "name": "morphr",
-  "version": "0.7.5",
+  "version": "0.7.7",
   "description": "Morphr - morphing numerical object values in a given time interval",
   "keywords": [
     "morphing",

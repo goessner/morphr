@@ -41,7 +41,8 @@ Sequential morphing is easily achieved via multiple <code>Morphr</code> objects.
 
 see [sequential](https://goessner.github.io/morphr/examples/sequential.html)
 
-Here is a more complex [Crank-Rocker animation](https://goessner.github.io/morphr/examples/complex.html).
+Here is a more complex [Crank-Rocker animation](https://goessner.github.io/morphr/examples/complex.html) using
+a [g2](https://github.com/goessner/g2) command queue for vector graphics.
 
 Maybe you want to learn a bit more about [Crank-Rockers](https://github.com/goessner/crocker).
 

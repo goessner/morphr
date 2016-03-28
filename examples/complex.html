@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Morphr Complex</title>
+</head>
+
+<body>
+    <h1>Morphr Complex</h1>
+    <canvas id="c" width="401" height="301"></canvas>
+    <script src='../../g2/dist/g2.js'></script>
+    <script src='../morphr.js'></script>
+    <script>
+// object value handlers ...
+function value(obj,prop,dval) {
+   return function val(q) {
+      if (val.val0 === undefined) val.val0 = obj[prop];
+      obj[prop] = val.val0 + q*dval; 
+   };
+}
+// render to canvas via g2 ..
+function render() {
+   cr.calc();
+   g2().clr()
+       .cartesian()
+       .pan(100,100)
+       .ply([0,0,cr.A.x,cr.A.y,cr.B.x,cr.B.y,cr.d,0],false,{ls:"#444",lw:5,lj:"round"})
+       .style({ls:"#555",lw:3,fs:"#ddd"})
+       .cir(0,0,6).cir(cr.A.x,cr.A.y,6).cir(cr.B.x,cr.B.y,6).cir(cr.d,0,6)
+       .exe(document.getElementById("c").getContext("2d"));
+}
+// define a crank rocker
+var cr = {a:50,b:100,c:80,d:100,phi:0,
+       calc: function() {
+         var cph = Math.cos(this.phi), sph = Math.sin(this.phi),
+             gx = this.d - this.a*cph, gy = -this.a*sph, gg = gx*gx + gy*gy,
+             bbgg = this.b*this.b/gg,
+             lam = (bbgg - this.c*this.c/gg + 1)/2,
+             mu = Math.sqrt(bbgg - lam*lam),
+             cth = (lam*gx - mu*gy)/this.b, sth = (lam*gy + mu*gx)/this.b,
+             cps = ((lam-1)*gx - mu*gy)/this.c, sps = ((lam-1)*gy + mu*gx)/this.c;
+         this.A = {x:this.a*cph,y:this.a*sph};
+         this.B = {x:this.d+this.c*cps,y:this.c*sps};
+       }
+    },
+    mph1 = Morphr.create(4,0,"sinoid")          // drive crank forth ...
+                 .register(value(cr,"phi",Math.PI))
+                 .register(render) 
+                 .start(),
+    mph2 = Morphr.create(4,4,"poly5")          // change coupler and rocker length ...
+                 .register(value(cr,"a",-20))
+                 .register(value(cr,"b",50))
+                 .register(value(cr,"c",75))
+                 .register(render) 
+                 .start(),
+    mph3 = Morphr.create(4,8,"sinoid")          // drive crank back ...
+                 .register(value(cr,"phi",-Math.PI))
+                 .register(render) 
+                 .start();
+    </script>
+</body>
+</html>

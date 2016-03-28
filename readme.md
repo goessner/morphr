@@ -43,7 +43,7 @@ see [sequential](https://goessner.github.io/morphr/examples/sequential.html)
 
 Here is a more complex [Crank-Rocker animation](https://goessner.github.io/morphr/examples/complex.html).
 
-Maybe you want to learn a bit more about [Crank-Rockers](https://goessner.github.io/crocker).
+Maybe you want to learn a bit more about [Crank-Rockers](https://github.com/goessner/crocker).
 
 ## API Reference
 

@@ -24,11 +24,11 @@ function render() {
 }
 var rec = {x:100,y:100,b:20,h:100},               // plain javascript rectangle object ... 
     morphr = Morphr.create(4,0,"sinoid")          // create and configure Morphr object ...
-                   .register(value(rec,"x",100))
-                   .register(value(rec,"y",50))
-                   .register(value(rec,"b",100))
-                   .register(value(rec,"h",-75))
-                   .register(render)
+                   .register(value(rec,"x",100))  // move along x-axis by 100 in 4 s.
+                   .register(value(rec,"y",50))   // move along y-axis by 50 in 4 s.
+                   .register(value(rec,"b",100))  // increase width by 100 in 4 s.
+                   .register(value(rec,"h",-75))  // decrease height by 75 in 4 s.
+                   .register(render)              // render to canvas
                    .start();
     </script>
 </body>

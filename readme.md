@@ -1,8 +1,8 @@
 # Morphr
 
-<code>Morphr</code> is a tiny and lightweight javascript class for morphing numerical values of arbitrary objects 
-in a given time interval `dt` along a given range `dval`. Most often you will want to use it for 
-animation.
+<code>Morphr</code> is a tiny and lightweight javascript class for morphing numerical values of 
+arbitrary, mostly plain javascript objects in a given time interval `dt` along a given range `dval`. 
+Most often you will want to use it for animation. So it works excellently in combination with Html canvas.
 
 ## Example
 ![Morphr Example](./morphr.gif)
@@ -29,11 +29,11 @@ function render() {
 }
 var rec = {x:100,y:100,b:20,h:100},               // plain javascript rectangle object ... 
     morphr = Morphr.create(4,0,"sinoid")          // create and configure Morphr object ...
-                   .register(value(rec,"x",100))
-                   .register(value(rec,"y",50))
-                   .register(value(rec,"b",100))
-                   .register(value(rec,"h",-75))
-                   .register(render)
+                   .register(value(rec,"x",100))  // move along x-axis by 100 in 4 s.
+                   .register(value(rec,"y",50))   // move along y-axis by 50 in 4 s.
+                   .register(value(rec,"b",100))  // increase width by 100 in 4 s.
+                   .register(value(rec,"h",-75))  // decrease height by 75 in 4 s.
+                   .register(render)              // render to canvas.
                    .start();
 </script>
 ```
@@ -45,8 +45,10 @@ see [sequential](https://goessner.github.io/morphr/examples/sequential.html)
 ## API Reference
 
 `Morphr` is a tiny class for simultaneously morphing numerical object values in a given time interval.
-Use case is most often parameter animation. `Morphr` depends on `requestAnimationFrame`.
-Do not use `new Morphr()`. Use `Morphr.create()` for creating instances.
+Use case is most often parameter animation of plain javascript objects. So it works excellently with
+canvas. `Morphr` depends on `requestAnimationFrame`.
+
+Do not use `new Morphr()`, call `Morphr.create()` instead for creating instances.
 
 * [Morphr](#Morphr)
   * _static_

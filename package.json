@@ -1,12 +1,13 @@
 {
   "name": "morphr",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "Morphr - morphing numerical object values in a given time interval",
   "keywords": [
     "morphing",
     "animation",
     "javascript",
-    "transition"
+    "transition",
+    "canvas"
   ],
   "main": "morphr.js",
   "scripts": {

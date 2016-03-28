@@ -8,8 +8,10 @@
 
 /** 
  * `Morphr` is a tiny class for simultaneously morphing numerical object values in a given time interval.
- * Use case is most often parameter animation. `Morphr` depends on `requestAnimationFrame`.
- * Do not use `new Morphr()`. Use `Morphr.create()` for creating instances.
+ * Use case is most often parameter animation of plain javascript objects. So it works excellently with
+ * canvas. `Morphr` depends on `requestAnimationFrame`.
+ * 
+ * Do not use `new Morphr()`, call `Morphr.create()` instead for creating instances.
  * @class 
  */
 var Morphr = {

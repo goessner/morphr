@@ -1,7 +1,7 @@
 {
   "name": "morphr",
-  "version": "0.7.8",
-  "description": "Morphr - morphing numerical object values in a given time interval",
+  "version": "0.7.9",
+  "description": "Morphr - lightweight morphing numerical object values in a given time interval",
   "keywords": [
     "morphing",
     "animation",
@@ -11,8 +11,10 @@
   ],
   "main": "morphr.js",
   "scripts": {
+    "build": "npm run minify && npm run jsdoc && npm run cpsamp",
     "jsdoc": "jsdoc2md ./morphr.js > ./api.md",
-    "minify": "uglifyjs --comments -o ./morphr.min.js ./morphr.js"
+    "minify": "uglifyjs --comments -o ./morphr.min.js ./morphr.js",
+    "cpsamp": "copyfiles -f ./examples/*.html ../goessner.github.io/morphr/examples"
   },
   "author": "Stefan Goessner <fang03@web.de>",
   "repository": {

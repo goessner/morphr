@@ -1,3 +1,6 @@
+[![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/goessner/g2/license.txt)
+[![npm](https://img.shields.io/npm/v/morphr.svg)](https://www.npmjs.com/package/morphr)
+
 # Morphr
 
 <code>Morphr</code> is a tiny and lightweight javascript class for morphing numerical values of 
@@ -45,6 +48,15 @@ Here is a more complex canvas based [Crank-Rocker animation](https://goessner.gi
 a [g2](https://github.com/goessner/g2) command queue for vector graphics.
 
 Maybe you want to learn a bit more about [Crank-Rockers](https://github.com/goessner/crocker).
+
+## GitCDN
+Use the link [https://gitcdn.xyz/repo/goessner/g2/master/morphr.min.js](https://gitcdn.xyz/repo/goessner/morphr/master/morphr.min.js)
+for getting the latest commit as a raw file.
+
+In HTML use ...
+```html
+<script src="https://gitcdn.xyz/repo/goessner/morphr/master/morphr.min.js"></script>
+```
 
 ## API Reference
 
